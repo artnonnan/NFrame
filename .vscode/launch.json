@@ -31,20 +31,22 @@
             "name": "Run SandBoxApp",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/SandBoxApp.exe",
+            "program": "${workspaceFolder}/build/SandBox/SandBoxApp.exe",
             "args": [],
-            "stopAtEntry": false,
+            "stopAtEntry": true,
             "cwd": "${workspaceFolder}",
             "environment": [],
             "externalConsole": true,
-            "MIMode": "gdb", // หรือ "lldb"
+            "miDebuggerPath": "D:/msys64/mingw64/bin/gdb.exe",
+            "MIMode": "gdb",
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",
                     "text": "-enable-pretty-printing",
                     "ignoreFailures": true
                 }
-            ]
+            ],
+            "preLaunchTask": "Build SandBox"
         }
     ],
     "version": "2.0.0"

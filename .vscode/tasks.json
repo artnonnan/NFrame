@@ -28,8 +28,12 @@
             "args": [
                 "-B",
                 "build",
+                "-G",
+                "Ninja",
                 "-DBUILD_NFRAME=ON",
-                "-DBUILD_SANDBOX=ON"
+                "-DBUILD_SANDBOX=ON",
+                "-DCMAKE_BUILD_TYPE=Debug"
+                
             ],
             "group": "build",
             "problemMatcher": [],
