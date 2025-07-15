@@ -1,0 +1,3 @@
+[submodule "NFrame/vendor/spdlog"]
+	path = NFrame/vendor/spdlog
+	url = https://github.com/gabime/spdlog.git
