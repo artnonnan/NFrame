@@ -1,7 +1,9 @@
 #pragma once
+#include "NFrame/Core/Core.h"
+
 namespace NFrame
 {
-    class __declspec(dllexport) Application
+    class NFRAME_API Application
     {
     public:
         Application() = default;

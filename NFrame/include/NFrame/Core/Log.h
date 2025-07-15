@@ -3,10 +3,10 @@
 #include <memory>
 
 #include "spdlog/spdlog.h"
-
+#include "NFrame/Core/Core.h"
 namespace NFrame
 {
-    class Log
+    class NFRAME_API Log
     {
     public:
         static void Init();
