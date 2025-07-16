@@ -52,7 +52,24 @@
         "text_encoding": "cpp",
         "cinttypes": "cpp",
         "typeinfo": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "bitset": "cpp",
+        "chrono": "cpp",
+        "codecvt": "cpp",
+        "complex": "cpp",
+        "condition_variable": "cpp",
+        "cstdarg": "cpp",
+        "map": "cpp",
+        "expected": "cpp",
+        "ratio": "cpp",
+        "regex": "cpp",
+        "source_location": "cpp",
+        "fstream": "cpp",
+        "iomanip": "cpp",
+        "mutex": "cpp",
+        "semaphore": "cpp",
+        "stop_token": "cpp",
+        "thread": "cpp"
     },
     "CodeGPT.apiKey": "CodeGPT Plus Beta"
 }

@@ -32,7 +32,7 @@
                 "-DBUILD_NFRAME=ON",
                 "-DBUILD_SANDBOX=ON",
                 "-DCMAKE_BUILD_TYPE=Debug",
-                "-DNF_BUILD_DLL=ON"
+                "-DNF_BUILD_DLL=OFF"
                 
             ],
             "group": "build",

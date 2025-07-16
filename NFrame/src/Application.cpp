@@ -1,6 +1,8 @@
+#include "NFrame/nfpch.h"
+#include "NFrame/Core/Log.h"
 #include "NFrame/Core/Application.h"
-#include <string>
-#include <iostream>
+#include "NFrame/Event/ApplicationEvent.h"
+
 
 namespace NFrame
 {
@@ -11,6 +13,10 @@ namespace NFrame
 
     void Application::Run()
     {
+        WindowResizeEvent resizeEvent(800, 600);
+        CLIENT_TRACE(resizeEvent.ToString());
+        // CORE_TRACE("Application started with size: {0}x{1}", resizeEvent.GetWidth(), resizeEvent.GetHeight());
+
         std::string input;
         while (true)
         {

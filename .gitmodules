@@ -1,3 +1,6 @@
 [submodule "NFrame/vendor/spdlog"]
 	path = NFrame/vendor/spdlog
 	url = https://github.com/gabime/spdlog.git
+[submodule "NFrame/vendor/GLFW"]
+	path = NFrame/vendor/GLFW
+	url = https://github.com/artnonnan/glfw.git

@@ -3,7 +3,9 @@
         {
             "name": "Win64",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/NFrame/include",
+                "${workspaceFolder}/NFrame/src",
+                "${workspaceFolder}/NFrame/vendor/spdlog/include"
             ],
             "defines": [
                 "_DEBUG",

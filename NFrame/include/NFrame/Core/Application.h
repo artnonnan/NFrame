@@ -1,5 +1,6 @@
 #pragma once
 #include "NFrame/Core/Core.h"
+#include "NFrame/Event/Event.h"
 
 namespace NFrame
 {
