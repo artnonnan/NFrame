@@ -2,6 +2,7 @@ project(NFrame)
 
 file(GLOB_RECURSE NFRAME_SOURCES CONFIGURE_DEPENDS
     "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/Platform/Windows/*.cpp"
 )
 
 message(STATUS "NFRAME_SOURCES:")

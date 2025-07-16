@@ -6,7 +6,7 @@ int main() {
     NFrame::Log::Init();
 
     auto app = NFrame::CreateApplication();
-    app->Start();
+    app->Run();
     delete app;
     return 0;
 }

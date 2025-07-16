@@ -69,7 +69,8 @@
         "mutex": "cpp",
         "semaphore": "cpp",
         "stop_token": "cpp",
-        "thread": "cpp"
+        "thread": "cpp",
+        "unordered_set": "cpp"
     },
     "CodeGPT.apiKey": "CodeGPT Plus Beta"
 }

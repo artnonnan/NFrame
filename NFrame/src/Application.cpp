@@ -2,32 +2,30 @@
 #include "NFrame/Core/Log.h"
 #include "NFrame/Core/Application.h"
 #include "NFrame/Event/ApplicationEvent.h"
-
+#include "NFrame/Core/Window.h"
+#include "GLFW/glfw3.h"
 
 namespace NFrame
 {
-    void Application::Start()
+    Application::Application()
     {
-        Run();
+       m_Window = std::unique_ptr<Window>(Window::Create());
+    }
+
+    Application::~Application()
+    {
     }
 
     void Application::Run()
     {
-        WindowResizeEvent resizeEvent(800, 600);
-        CLIENT_TRACE(resizeEvent.ToString());
-        // CORE_TRACE("Application started with size: {0}x{1}", resizeEvent.GetWidth(), resizeEvent.GetHeight());
 
         std::string input;
-        while (true)
+        while (m_Running)
         {
-            std::cout << "> ";
-            std::getline(std::cin, input);
-            if (input == "q")
-            {
-                std::cout << "Exiting main loop.\n";
-                break;
-            }
-            std::cout << "You typed: " << input << "\n";
+            glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+            glClear(GL_COLOR_BUFFER_BIT);
+            m_Window->OnUpdate();
+
         }
     }
     Application* CreateApplication();

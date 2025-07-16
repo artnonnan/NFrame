@@ -5,14 +5,17 @@
             "includePath": [
                 "${workspaceFolder}/NFrame/include",
                 "${workspaceFolder}/NFrame/src",
-                "${workspaceFolder}/NFrame/vendor/spdlog/include"
+                "${workspaceFolder}/NFrame/vendor/spdlog/include",
+                "${workspaceFolder}/NFrame/vendor/GLFW/include"
+
             ],
             "defines": [
                 "_DEBUG",
                 "UNICODE",
                 "_UNICODE",
                 "NF_PLATFORM_WINDOWS",
-                "NF_BUILD_DLL"
+                "NF_BUILD_DLL",
+                "NF_ENABLE_ASSERTS"
             ],
             "windowsSdkVersion": "10.0.18362.0",
             "cStandard": "c17",

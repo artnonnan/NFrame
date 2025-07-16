@@ -14,7 +14,12 @@
 #include <cassert>
 
 // Platform-specific
-#include <Windows.h>
+#ifdef NF_PLATFORM_WINDOWS
+    #include <Windows.h>
+#endif
+
 #include <spdlog/spdlog.h>
 #include <spdlog/fmt/ostr.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
+
+#include "NFrame/Core/Log.h"

@@ -1,5 +1,5 @@
 #include "NFrame/nfpch.h"
-#include "NFrame/Core/Log.h"
+
 namespace NFrame
 {
     std::shared_ptr<spdlog::logger> Log::s_CoreLogger;
