@@ -11,6 +11,8 @@ foreach(src ${NFRAME_SOURCES})
 endforeach()
 
 
+
+
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
@@ -18,7 +20,8 @@ set(GLFW_BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
 
 add_subdirectory(vendor/GLFW)
 
-
+add_library(glad STATIC vendor/GLAD/src/glad.c)
+target_include_directories(glad PUBLIC vendor/GLAD/include)
 
 if(NF_BUILD_DLL)
     add_library(NFrame SHARED ${NFRAME_SOURCES})
@@ -33,13 +36,13 @@ else()
 endif()
 
 
+
 target_include_directories(NFrame PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     vendor/spdlog/include
     vendor/GLFW/include
 )
-
-target_link_libraries(NFrame PUBLIC glfw opengl32)
+target_link_libraries(NFrame PUBLIC glad glfw opengl32)
 target_precompile_headers(NFrame PRIVATE "include/NFrame/nfpch.h")
 target_compile_definitions(NFrame PUBLIC NF_PLATFORM_WINDOWS)
 

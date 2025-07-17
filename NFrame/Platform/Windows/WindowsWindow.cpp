@@ -4,6 +4,8 @@
 #include "NFrame/Event/ApplicationEvent.h"
 #include "NFrame/Event/KeyEvent.h"
 #include "NFrame/Event/MouseEvent.h"
+#include "glad/glad.h"
+#include <GLFW/glfw3.h>
 
 namespace NFrame {
     static bool s_GLFWInitialized = false;
@@ -37,6 +39,9 @@ namespace NFrame {
         m_Window = glfwCreateWindow(m_Data.Width, m_Data.Height, m_Data.Title.c_str(), nullptr, nullptr);
 
         glfwMakeContextCurrent(m_Window);
+        int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+        CORE_ASSERT(status, "Failed to initialize GLAD!");
+
         glfwSetWindowUserPointer(m_Window, &m_Data);
         SetVSync(true);
         glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height) {

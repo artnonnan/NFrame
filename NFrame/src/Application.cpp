@@ -2,6 +2,7 @@
 #include "NFrame/Core/Application.h"
 #include "NFrame/Event/ApplicationEvent.h"
 #include "NFrame/Core/Window.h"
+#include "GLAD/glad.h"
 #include "GLFW/glfw3.h"
 
 namespace NFrame
@@ -11,7 +12,8 @@ namespace NFrame
     Application::Application()
     {
        m_Window = std::unique_ptr<Window>(Window::Create());
-       m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));    
+       m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent)); 
+       
     }
 
     Application::~Application()

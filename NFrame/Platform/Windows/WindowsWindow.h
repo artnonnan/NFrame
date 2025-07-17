@@ -1,7 +1,7 @@
 #pragma once
 #include "NFrame/Core/Window.h"
-#include "GLFW/glfw3.h"
 
+struct GLFWwindow;
 namespace NFrame
 {
     class WindowsWindow : public Window
