@@ -8,5 +8,6 @@ int main() {
     auto app = NFrame::CreateApplication();
     app->Run();
     delete app;
+
     return 0;
 }

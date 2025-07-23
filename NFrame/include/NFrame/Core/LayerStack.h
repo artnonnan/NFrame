@@ -22,6 +22,7 @@ namespace NFrame
     private:
         std::vector<Layer*> m_Layers;
         std::vector<Layer*>::iterator m_LayerInsert;
+        unsigned int m_LayerInsertIndex = 0;
     };
 
 } // namespace NFrame

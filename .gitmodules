@@ -4,3 +4,6 @@
 [submodule "NFrame/vendor/GLFW"]
 	path = NFrame/vendor/GLFW
 	url = https://github.com/artnonnan/glfw.git
+[submodule "NFrame/vendor/imgui"]
+	path = NFrame/vendor/imgui
+	url = https://github.com/artnonnan/imgui

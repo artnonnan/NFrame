@@ -42,6 +42,13 @@ namespace NFrame {
         int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
         CORE_ASSERT(status, "Failed to initialize GLAD!");
 
+        glEnable(GL_DEBUG_OUTPUT);
+        glDebugMessageCallback([](GLenum source, GLenum type, GLuint id, GLenum severity,
+                                GLsizei length, const GLchar* message, const void* userParam)
+        {
+            std::cerr << "OpenGL Debug: " << message << std::endl;
+        }, nullptr);
+
         glfwSetWindowUserPointer(m_Window, &m_Data);
         SetVSync(true);
         glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height) {

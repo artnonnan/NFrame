@@ -2,7 +2,7 @@ project(NFrame)
 
 file(GLOB_RECURSE NFRAME_SOURCES CONFIGURE_DEPENDS
     "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/Platform/Windows/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/include/*.cpp"
 )
 
 message(STATUS "NFRAME_SOURCES:")
@@ -19,6 +19,8 @@ set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
 
 add_subdirectory(vendor/GLFW)
+add_subdirectory(vendor/imgui)
+
 
 add_library(glad STATIC vendor/GLAD/src/glad.c)
 target_include_directories(glad PUBLIC vendor/GLAD/include)
@@ -36,6 +38,7 @@ else()
 endif()
 
 
+target_link_libraries(NFrame PUBLIC imgui)
 
 target_include_directories(NFrame PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include
