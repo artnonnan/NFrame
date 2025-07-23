@@ -9,10 +9,16 @@ public:
 
     void OnUpdate() override {
         // CLIENT_INFO("ExampleLayer Update");
+        if(NFrame::Input::IsKeyPressed(NF_KEY_TAB)) {
+            CLIENT_INFO("Tab key is pressed");
+        }
     }
 
     void OnEvent(NFrame::Event& event) override {
-        // CLIENT_TRACE("ExampleLayer Event: {0}", event.ToString());
+        if(NFrame::EventType::KeyPressed == event.GetEventType()) {
+            NFrame::KeyPressedEvent& e = static_cast<NFrame::KeyPressedEvent&>(event);
+            CLIENT_INFO("{0}" , (char)e.GetKeyCode());
+        }
     }
 };
 
