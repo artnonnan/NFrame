@@ -44,6 +44,7 @@ target_include_directories(NFrame PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     vendor/spdlog/include
     vendor/GLFW/include
+    vendor/glm
 )
 target_link_libraries(NFrame PUBLIC glad glfw opengl32)
 target_precompile_headers(NFrame PRIVATE "include/NFrame/nfpch.h")

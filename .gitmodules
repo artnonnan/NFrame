@@ -7,3 +7,6 @@
 [submodule "NFrame/vendor/imgui"]
 	path = NFrame/vendor/imgui
 	url = https://github.com/artnonnan/imgui
+[submodule "NFrame/vendor/glm"]
+	path = NFrame/vendor/glm
+	url = https://github.com/g-truc/glm.git

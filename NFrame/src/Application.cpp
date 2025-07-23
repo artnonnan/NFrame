@@ -5,6 +5,7 @@
 #include "GLAD/glad.h"
 #include "GLFW/glfw3.h"
 #include "NFrame/Core/Input.h"
+#include "glm/glm.hpp"
 
 namespace NFrame
 {
