@@ -4,6 +4,7 @@
 #include "NFrame/Core/Window.h"
 #include "GLAD/glad.h"
 #include "GLFW/glfw3.h"
+#include "NFrame/Core/Input.h"
 
 namespace NFrame
 {
@@ -61,6 +62,8 @@ namespace NFrame
             for (Layer *layer : m_LayerStack)
             {
                 layer->OnUpdate();
+                auto[x, y] = Input::GetMousePosition();
+                CORE_TRACE("Mouse Position: ({0}, {1})", x, y);
             }
             m_Window->OnUpdate();
         }
