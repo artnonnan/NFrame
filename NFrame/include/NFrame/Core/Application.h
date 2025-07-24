@@ -28,6 +28,7 @@ namespace NFrame
         ImGuiLayer* m_ImGuiLayer;
         bool m_Running = true;
         LayerStack m_LayerStack;
+        unsigned int m_vertextArray, m_vertexBuffer, m_indexBuffer;
     private:
         static Application* s_Instance;
     };
