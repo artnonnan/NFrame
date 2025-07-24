@@ -6,6 +6,8 @@
 #include "NFrame/Core/LayerStack.h"
 #include "NFrame/Event/Event.h"
 #include "NFrame/Event/ApplicationEvent.h"
+#include "NFrame/ImGui/ImGuiLayer.h"
+
 
 namespace NFrame
 {
@@ -23,6 +25,7 @@ namespace NFrame
     private:
         bool OnWindowClose(WindowCloseEvent& e);
         std::unique_ptr<Window> m_Window;
+        ImGuiLayer* m_ImGuiLayer;
         bool m_Running = true;
         LayerStack m_LayerStack;
     private:

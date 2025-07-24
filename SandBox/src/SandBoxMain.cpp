@@ -1,7 +1,8 @@
 #include "NFrame/nfpch.h"
 #include "NFrame.h"
 #include "NFrame/Core/EntryPoint.h"
-
+#include "imgui.h"
+#include "NFrame/ImGui/ImGuiLayer.h"
 
 class ExampleLayer : public NFrame::Layer {
 public:
@@ -20,13 +21,18 @@ public:
             CLIENT_INFO("{0}" , (char)e.GetKeyCode());
         }
     }
+
+    void OnImGuiRender() override {
+        ImGui::Begin("Example Layer");
+        ImGui::Text("Hello from ExampleLayer!");
+        ImGui::End();
+    }
 };
 
 class SandBoxApplication : public NFrame::Application {
 public:
     SandBoxApplication() {
         PushLayer(new ExampleLayer());
-        PushOverlay(new NFrame::ImGuiLayer());
         CLIENT_INFO("SandBoxApplication created");
     }
     virtual ~SandBoxApplication() {
