@@ -31,20 +31,48 @@ namespace NFrame
         glGenBuffers(1, &m_vertexBuffer);
         glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
 
-        float vertices[3 * 3]  = {
-            -0.5f, -0.5f, 0.0f,
-             0.5f, -0.5f, 0.0f,
-             0.0f,  0.5f, 0.0f
+        float vertices[] = {
+            // positions        // colors
+            -0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,  // bottom left - red
+            0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,  // bottom right - green
+            0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f   // top - blue
         };
 
         glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+        // ตำแหน่ง (location = 0)
         glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+
+        // สี (location = 1)
+        glEnableVertexAttribArray(1);
+        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
         glGenBuffers(1, &m_indexBuffer);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBuffer);
         unsigned int indices[3] = { 0, 1, 2 };
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
         // glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+        std::string vertexSrc = R"(
+            #version 330 core
+            layout(location = 0) in vec3 a_Position;
+            layout(location = 1) in vec3 a_Color;
+            out vec3 v_Color;
+            void main()
+            {
+                v_Color = a_Color;
+                gl_Position = vec4(a_Position, 1.0);
+            }
+        )";
+        std::string fragmentSrc = R"(
+            #version 330 core
+            out vec4 color;
+            in vec3 v_Color;
+            void main()
+            {
+                color = vec4(v_Color, 1.0); 
+            }
+        )";
+        m_Shader.reset(new Shader(vertexSrc, fragmentSrc));
     }
 
     Application::~Application()
@@ -86,6 +114,7 @@ namespace NFrame
             glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT);
 
+            m_Shader->Bind();
             glBindVertexArray(m_vertextArray);
             glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
 

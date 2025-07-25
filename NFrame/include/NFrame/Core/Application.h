@@ -7,7 +7,7 @@
 #include "NFrame/Event/Event.h"
 #include "NFrame/Event/ApplicationEvent.h"
 #include "NFrame/ImGui/ImGuiLayer.h"
-
+#include "NFrame/Renderer/Shader.h"
 
 namespace NFrame
 {
@@ -29,6 +29,7 @@ namespace NFrame
         bool m_Running = true;
         LayerStack m_LayerStack;
         unsigned int m_vertextArray, m_vertexBuffer, m_indexBuffer;
+        std::unique_ptr<Shader> m_Shader;
     private:
         static Application* s_Instance;
     };
