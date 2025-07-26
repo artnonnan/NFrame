@@ -8,6 +8,7 @@
 #include "NFrame/Event/ApplicationEvent.h"
 #include "NFrame/ImGui/ImGuiLayer.h"
 #include "NFrame/Renderer/Shader.h"
+#include "NFrame/Renderer/Buffer.h"
 
 namespace NFrame
 {
@@ -28,8 +29,10 @@ namespace NFrame
         ImGuiLayer* m_ImGuiLayer;
         bool m_Running = true;
         LayerStack m_LayerStack;
-        unsigned int m_vertextArray, m_vertexBuffer, m_indexBuffer;
+        unsigned int m_vertextArray;
         std::unique_ptr<Shader> m_Shader;
+        std::unique_ptr<VertexBuffer> m_VertexBuffer;
+        std::unique_ptr<IndexBuffer> m_IndexBuffer;
     private:
         static Application* s_Instance;
     };

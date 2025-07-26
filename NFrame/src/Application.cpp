@@ -28,8 +28,6 @@ namespace NFrame
         glGenVertexArrays(1, &m_vertextArray);
         glBindVertexArray(m_vertextArray);
 
-        glGenBuffers(1, &m_vertexBuffer);
-        glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
 
         float vertices[] = {
             // positions        // colors
@@ -38,19 +36,15 @@ namespace NFrame
             0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f   // top - blue
         };
 
-        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-        // ตำแหน่ง (location = 0)
+        m_VertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
+
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
 
-        // สี (location = 1)
         glEnableVertexAttribArray(1);
         glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
-        glGenBuffers(1, &m_indexBuffer);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBuffer);
-        unsigned int indices[3] = { 0, 1, 2 };
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-        // glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+        uint32_t indices[3] = { 0, 1, 2 };
+        m_IndexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 
         std::string vertexSrc = R"(
             #version 330 core
@@ -116,7 +110,7 @@ namespace NFrame
 
             m_Shader->Bind();
             glBindVertexArray(m_vertextArray);
-            glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
+            glDrawElements(GL_TRIANGLES, m_IndexBuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
 
             for (Layer *layer : m_LayerStack)
             {

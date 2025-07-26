@@ -12,6 +12,7 @@
 #include <sstream>
 #include <fstream>
 #include <cassert>
+#include <stdint.h>
 
 // Platform-specific
 #ifdef NF_PLATFORM_WINDOWS
