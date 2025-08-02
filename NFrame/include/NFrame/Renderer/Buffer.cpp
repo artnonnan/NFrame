@@ -10,7 +10,7 @@ namespace NFrame
         switch (Renderer::GetAPI())
         {
             case RendererAPI::None:    CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-            case RendererAPI::OpenGL:  return new OpenGLVerrtexBuffer(vertices, size);
+            case RendererAPI::OpenGL:  return new OpenGLVertexBuffer(vertices, size);
             case RendererAPI::Vulkan:  CORE_ASSERT(false, "RendererAPI::Vulkan is currently not supported!"); return nullptr;
             case RendererAPI::DirectX: CORE_ASSERT(false, "RendererAPI::DirectX is currently not supported!"); return nullptr;
         }
