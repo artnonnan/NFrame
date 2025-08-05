@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-
+#include <glm/glm.hpp>
 namespace NFrame
 {
     class Shader
@@ -11,6 +11,8 @@ namespace NFrame
         ~Shader();
         void Bind() const;
         void Unbind() const;
+
+        void UploadUniformMat4(const std::string& name,const glm::mat4& matrix);
     private:
         unsigned int m_RendererID;
         // std::string m_VertexSrc;

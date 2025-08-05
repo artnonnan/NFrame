@@ -10,6 +10,7 @@
 #include "NFrame/Renderer/Shader.h"
 #include "NFrame/Renderer/Buffer.h"
 #include "NFrame/Renderer/VertexArray.h"
+#include "NFrame/Renderer/OrthographicCamera.h"
 
 namespace NFrame
 {
@@ -35,7 +36,7 @@ namespace NFrame
 
         std::shared_ptr<Shader> m_BlueShader;
         std::shared_ptr<VertexArray> m_squareVA;
-
+        OrthographicCamera m_Camera;
     private:
         static Application* s_Instance;
     };
