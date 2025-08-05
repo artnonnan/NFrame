@@ -2,10 +2,8 @@
 #include "NFrame/Core/Application.h"
 #include "NFrame/Event/ApplicationEvent.h"
 #include "NFrame/Core/Window.h"
-#include "GLAD/glad.h"
-#include "GLFW/glfw3.h"
 #include "NFrame/Core/Input.h"
-#include "glm/glm.hpp"
+#include "NFrame/Renderer/Renderer.h"
 
 namespace NFrame
 {
@@ -40,7 +38,6 @@ namespace NFrame
         vertexBuffer->SetLayout(layout);
         m_VertexArray->AddVertexBuffer(vertexBuffer);
 
-
         uint32_t indices[3] = {0, 1, 2};
         std::shared_ptr<IndexBuffer> indexBuffer;
         indexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
@@ -48,17 +45,14 @@ namespace NFrame
 
         m_squareVA.reset(VertexArray::Create());
         float squareVertices[3 * 4] = {
-            -0.75f,  -0.75f, 0.0f,
-             0.75f,  -0.75f, 0.0f,
-             0.75f,   0.75f, 0.0f,
-            -0.75f,   0.75f, 0.0f
-        };
+            -0.75f, -0.75f, 0.0f,
+            0.75f, -0.75f, 0.0f,
+            0.75f, 0.75f, 0.0f,
+            -0.75f, 0.75f, 0.0f};
         std::shared_ptr<VertexBuffer> squareVB;
         squareVB.reset(VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
-        
-        squareVB->SetLayout({
-            {ShaderDataType::Float3, "a_Position"}
-            });
+
+        squareVB->SetLayout({{ShaderDataType::Float3, "a_Position"}});
         m_squareVA->AddVertexBuffer(squareVB);
 
         uint32_t squareIndices[6] = {0, 1, 2, 2, 3, 0};
@@ -95,7 +89,6 @@ namespace NFrame
         )";
         m_Shader.reset(new Shader(vertexSrc, fragmentSrc));
 
-        
         std::string vertexSrc2 = R"(
             #version 330 core
             layout(location = 0) in vec3 a_Position;
@@ -156,18 +149,21 @@ namespace NFrame
         std::string input;
         while (m_Running)
         {
-            glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-            glClear(GL_COLOR_BUFFER_BIT);
+
+            RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1.0f});
+            RenderCommand::Clear();
+
+            Renderer::BeginScene();
 
             m_BlueShader->Bind();
-            m_squareVA->Bind();
-            glDrawElements(GL_TRIANGLES, m_squareVA->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+            Renderer::Submit(m_squareVA);
 
             m_Shader->Bind();
-            m_VertexArray->Bind();
-            glDrawElements(GL_TRIANGLES, m_VertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+            Renderer::Submit(m_VertexArray);
 
-            for (Layer *layer : m_LayerStack)
+            Renderer::EndScene();
+
+                       for (Layer *layer : m_LayerStack)
             {
                 layer->OnUpdate();
             }

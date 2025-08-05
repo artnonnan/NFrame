@@ -1,20 +1,17 @@
 #pragma once
 
-namespace NFrame{
+#include "NFrame/Renderer/RenderCommand.h"
 
-    enum class RendererAPI
+namespace NFrame
+{
+
+    class Renderer
     {
-        None = 0,
-        OpenGL = 1,
-        Vulkan = 2,
-        DirectX = 3
-    };
+    public:
+        static void BeginScene();
+        static void EndScene();
 
-    class Renderer{
-
-        public:
-        inline static RendererAPI GetAPI() { return s_RendererAPI; }
-        private:
-        static RendererAPI s_RendererAPI;
+        static void Submit(const std::shared_ptr<VertexArray>& vertexArray);
+        inline static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
     };
 }
