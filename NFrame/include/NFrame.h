@@ -11,3 +11,12 @@
 #include "NFrame/Event/KeyEvent.h"
 
 #include "NFrame/ImGui/ImGuiLayer.h"
+
+#include "NFrame/Renderer/Renderer.h"
+#include "NFrame/Renderer/RenderCommand.h"
+
+#include "NFrame/Renderer/Buffer.h"
+#include "NFrame/Renderer/Shader.h"
+#include "NFrame/Renderer/VertexArray.h"
+
+#include "NFrame/Renderer/OrthographicCamera.h"
