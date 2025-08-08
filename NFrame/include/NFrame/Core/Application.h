@@ -11,6 +11,7 @@
 #include "NFrame/Renderer/Buffer.h"
 #include "NFrame/Renderer/VertexArray.h"
 #include "NFrame/Renderer/OrthographicCamera.h"
+#include "NFrame/Core/Timestep.h"
 
 namespace NFrame
 {
@@ -27,11 +28,13 @@ namespace NFrame
         inline Window& GetWindow() { return *m_Window; }
     private:
         bool OnWindowClose(WindowCloseEvent& e);
+    private:
         std::unique_ptr<Window> m_Window;
         ImGuiLayer* m_ImGuiLayer;
         bool m_Running = true;
         LayerStack m_LayerStack;
-
+        Timestep m_Timestep;
+        float m_LastFrameTime = 0.0f;
     private:
         static Application* s_Instance;
     };

@@ -5,7 +5,7 @@
 #include "NFrame/Core/Input.h"
 #include "NFrame/Renderer/Renderer.h"
 #include "NFrame/Renderer/OrthographicCamera.h"
-
+#include <glfw/glfw3.h>
 namespace NFrame
 {
 
@@ -60,9 +60,13 @@ namespace NFrame
         std::string input;
         while (m_Running)
         {
+            float time = (float) glfwGetTime(); // Platform::GetTime
+            Timestep timestep = time - m_LastFrameTime;
+            m_LastFrameTime = time;
+
             for (Layer *layer : m_LayerStack)
             {
-                layer->OnUpdate();
+                layer->OnUpdate(timestep);
             }
             m_ImGuiLayer->Begin();
             for (Layer *layer : m_LayerStack)

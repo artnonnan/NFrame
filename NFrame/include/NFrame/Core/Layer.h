@@ -1,7 +1,7 @@
 #pragma once
 #include "NFrame/Core/Core.h"
 #include "NFrame/Event/Event.h"
-
+#include "NFrame/Core/Timestep.h"
 namespace NFrame
 {
 
@@ -13,7 +13,7 @@ namespace NFrame
 
         virtual void OnAttach() {}
         virtual void OnDetach() {}
-        virtual void OnUpdate() {}
+        virtual void OnUpdate(Timestep timestep) {}
         virtual void OnImGuiRender() {}
         virtual void OnEvent(Event& event) {}
 
