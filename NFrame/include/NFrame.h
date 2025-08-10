@@ -17,6 +17,7 @@
 
 #include "NFrame/Renderer/Buffer.h"
 #include "NFrame/Renderer/Shader.h"
+#include "NFrame/Renderer/Texture.h"
 #include "NFrame/Renderer/VertexArray.h"
 
 #include "NFrame/Renderer/OrthographicCamera.h"

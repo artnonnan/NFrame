@@ -36,6 +36,7 @@ if(NF_BUILD_DLL)
 else()
     add_library(NFrame STATIC ${NFRAME_SOURCES})
 endif()
+target_sources(NFrame PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/vendor/stb_image/stb_image.cpp)
 
 
 target_link_libraries(NFrame PUBLIC imgui)
@@ -45,6 +46,7 @@ target_include_directories(NFrame PUBLIC
     vendor/spdlog/include
     vendor/GLFW/include
     vendor/glm
+    vendor/stb_image
 )
 target_link_libraries(NFrame PUBLIC glad glfw opengl32)
 target_precompile_headers(NFrame PRIVATE "include/NFrame/nfpch.h")
