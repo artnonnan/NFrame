@@ -1,5 +1,7 @@
 #include "NFrame/nfpch.h"
 #include "Renderer.h"  
+#include "NFrame/Platform/OpenGL/OpenGLShader.h"
+
 namespace NFrame {
 
     Renderer::SceneData* Renderer::m_SceneData = new Renderer::SceneData;
@@ -14,8 +16,8 @@ namespace NFrame {
 
     void Renderer::Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertexArray, const glm::mat4& transform) {
         shader->Bind();
-        shader->UploadUniformMat4("u_ViewProjection", m_SceneData->ViewProjectionMatrix);
-        shader->UploadUniformMat4("u_Transform", transform);
+        std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("u_ViewProjection", m_SceneData->ViewProjectionMatrix);
+        std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("u_Transform", transform);
 
 
         vertexArray->Bind();
