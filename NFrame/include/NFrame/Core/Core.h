@@ -1,5 +1,5 @@
 #pragma once
-
+#include <memory>
 #ifdef NF_PLATFORM_WINDOWS
     #if defined(NF_BUILD_DLL)
         #define NFRAME_API __declspec(dllexport)
@@ -23,3 +23,10 @@
 #define BIT(x) (1 << x)
 
 #define BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
+
+namespace NFrame {
+    template<typename T>
+    using Scope = std::unique_ptr<T>;
+    template<typename T>
+    using Ref = std::shared_ptr<T>;
+}

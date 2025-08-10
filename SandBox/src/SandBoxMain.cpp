@@ -16,7 +16,7 @@ public:
             0.5f, -0.5f, 0.0f, 0.2f, 0.2f, 0.8f, 1.0f,
             0.0f, 0.5f, 0.0f, 0.2f, 0.8f, 0.2f, 1.0f};
 
-        std::shared_ptr<NFrame::VertexBuffer> vertexBuffer;
+        NFrame::Ref<NFrame::VertexBuffer> vertexBuffer;
         vertexBuffer.reset(NFrame::VertexBuffer::Create(vertices, sizeof(vertices)));
 
         NFrame::BufferLayout layout = {
@@ -26,7 +26,7 @@ public:
         m_VertexArray->AddVertexBuffer(vertexBuffer);
 
         uint32_t indices[3] = {0, 1, 2};
-        std::shared_ptr<NFrame::IndexBuffer> indexBuffer;
+        NFrame::Ref<NFrame::IndexBuffer> indexBuffer;
         indexBuffer.reset(NFrame::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
         m_VertexArray->SetIndexBuffer(indexBuffer);
 
@@ -36,14 +36,14 @@ public:
              0.5f, -0.5f, 0.0f,
              0.5f,  0.5f, 0.0f,
             -0.5f,  0.5f, 0.0f};
-        std::shared_ptr<NFrame::VertexBuffer> squareVB;
+        NFrame::Ref<NFrame::VertexBuffer> squareVB;
         squareVB.reset(NFrame::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 
         squareVB->SetLayout({{NFrame::ShaderDataType::Float3, "a_Position"}});
         m_squareVA->AddVertexBuffer(squareVB);
 
         uint32_t squareIndices[6] = {0, 1, 2, 2, 3, 0};
-        std::shared_ptr<NFrame::IndexBuffer> squareIB;
+        NFrame::Ref<NFrame::IndexBuffer> squareIB;
         squareIB.reset(NFrame::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
         m_squareVA->SetIndexBuffer(squareIB);
 
@@ -172,11 +172,11 @@ public:
         ImGui::End();
     }
 private:
-    std::shared_ptr<NFrame::Shader> m_Shader;
-    std::shared_ptr<NFrame::VertexArray> m_VertexArray;
+    NFrame::Ref<NFrame::Shader> m_Shader;
+    NFrame::Ref<NFrame::VertexArray> m_VertexArray;
 
-    std::shared_ptr<NFrame::Shader> m_BlueShader;
-    std::shared_ptr<NFrame::VertexArray> m_squareVA;
+    NFrame::Ref<NFrame::Shader> m_BlueShader;
+    NFrame::Ref<NFrame::VertexArray> m_squareVA;
     NFrame::OrthographicCamera m_Camera;
     glm::vec3 m_CameraPosition;
     float m_CameraMoveSpeed = 5.00f;

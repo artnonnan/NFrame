@@ -23,4 +23,5 @@
 #include <spdlog/fmt/ostr.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 
+#include "NFrame/Core/Core.h"
 #include "NFrame/Core/Log.h"
