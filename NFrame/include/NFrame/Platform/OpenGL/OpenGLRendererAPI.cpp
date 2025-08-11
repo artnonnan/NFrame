@@ -3,6 +3,16 @@
 #include <glad/glad.h>
 
 namespace NFrame {
+    void OpenGLRendererAPI::Init() {
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        // glEnable(GL_DEPTH_TEST);
+        // glDepthFunc(GL_LESS);
+        // glEnable(GL_CULL_FACE);
+        // glCullFace(GL_BACK);
+        // glFrontFace(GL_CCW);
+        // glEnable(GL_DEBUG_OUTPUT);
+    }
     void OpenGLRendererAPI::SetClearColor(const glm::vec4& color) {
         glClearColor(color.r, color.g, color.b, color.a);
     }
