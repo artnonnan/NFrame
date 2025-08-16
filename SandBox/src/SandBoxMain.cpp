@@ -83,6 +83,7 @@ public:
             }
         )";
         m_Shader.reset(NFrame::Shader::Create(vertexSrc, fragmentSrc));
+        
 
         std::string vertexSrc2 = R"(
             #version 330 core
@@ -112,36 +113,8 @@ public:
         )";
         m_BlueShader.reset(NFrame::Shader::Create(vertexSrc2, fragmentSrc2));
 
-        std::string textureVertexSrc = R"(
-            #version 330 core
-            layout(location = 0) in vec3 a_Position;
-            layout(location = 1) in vec2 a_TexCoord;
-
-            uniform mat4 u_ViewProjection;
-            uniform mat4 u_Transform;
-
-            out vec2 v_TexCoord;
-
-            void main()
-            {
-                v_TexCoord = a_TexCoord;
-                gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
-            }
-        )";
-        std::string textureFragmentSrc = R"(
-            #version 330 core
-            layout(location = 0) out vec4 color;
-
-            uniform sampler2D u_Texture;
-
-            in vec2 v_TexCoord;
-
-            void main()
-            {
-                color = texture(u_Texture, v_TexCoord);
-            }
-        )";
-        m_TextureShader.reset(NFrame::Shader::Create(textureVertexSrc, textureFragmentSrc));
+       
+        m_TextureShader.reset(NFrame::Shader::Create("Sandbox/assets/shaders/Texture.glsl"));
         m_Texture = NFrame::Texture2D::Create("Sandbox/assets/textures/Checkerboard.png");
 
         m_LogoTexture = NFrame::Texture2D::Create("Sandbox/assets/textures/ChernoLogo.png");
