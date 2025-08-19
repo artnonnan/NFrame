@@ -82,7 +82,7 @@ public:
                 color = v_Color;
             }
         )";
-        m_Shader.reset(NFrame::Shader::Create(vertexSrc, fragmentSrc));
+        m_Shader = NFrame::Shader::Create("VertexPosColor", vertexSrc, fragmentSrc);
         
 
         std::string vertexSrc2 = R"(
@@ -111,16 +111,16 @@ public:
                 color = vec4(u_Color, 1.0); 
             }
         )";
-        m_BlueShader.reset(NFrame::Shader::Create(vertexSrc2, fragmentSrc2));
+        m_BlueShader = NFrame::Shader::Create("flatColor", vertexSrc2, fragmentSrc2);
 
        
-        m_TextureShader.reset(NFrame::Shader::Create("Sandbox/assets/shaders/Texture.glsl"));
+        auto textureShader = m_ShaderLibrary.Load("Sandbox/assets/shaders/Texture.glsl");
         m_Texture = NFrame::Texture2D::Create("Sandbox/assets/textures/Checkerboard.png");
 
         m_LogoTexture = NFrame::Texture2D::Create("Sandbox/assets/textures/ChernoLogo.png");
             
-        std::dynamic_pointer_cast<NFrame::OpenGLShader>(m_TextureShader)->Bind();
-        std::dynamic_pointer_cast<NFrame::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
+        std::dynamic_pointer_cast<NFrame::OpenGLShader>(textureShader)->Bind();
+        std::dynamic_pointer_cast<NFrame::OpenGLShader>(textureShader)->UploadUniformInt("u_Texture", 0);
     }
 
     void OnUpdate(NFrame::Timestep ts) override {
@@ -152,6 +152,7 @@ public:
         m_Camera.SetRotation(m_CameraRotation);
         NFrame::Renderer::BeginScene(m_Camera);
 
+
         glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
         std::dynamic_pointer_cast<NFrame::OpenGLShader>(m_BlueShader)->Bind();
@@ -169,11 +170,12 @@ public:
             }
 
         }
+        auto textureShader = m_ShaderLibrary.Get("Texture");
         m_Texture->Bind();
-        NFrame::Renderer::Submit(m_TextureShader, m_squareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+        NFrame::Renderer::Submit(textureShader, m_squareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 
         m_LogoTexture->Bind();
-        NFrame::Renderer::Submit(m_TextureShader, m_squareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+        NFrame::Renderer::Submit(textureShader, m_squareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 
         // NFrame::Renderer::Submit(m_Shader, m_VertexArray);
 
@@ -193,11 +195,12 @@ public:
         ImGui::End();
     }
 private:
+    NFrame::ShaderLibrary m_ShaderLibrary;
     NFrame::Ref<NFrame::Shader> m_Shader;
     NFrame::Ref<NFrame::VertexArray> m_VertexArray;
 
     NFrame::Ref<NFrame::Texture2D> m_Texture , m_LogoTexture;
-    NFrame::Ref<NFrame::Shader> m_BlueShader, m_TextureShader;
+    NFrame::Ref<NFrame::Shader> m_BlueShader;
     NFrame::Ref<NFrame::VertexArray> m_squareVA;
     NFrame::OrthographicCamera m_Camera;
     glm::vec3 m_CameraPosition;

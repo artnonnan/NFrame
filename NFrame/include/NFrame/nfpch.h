@@ -10,6 +10,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <sstream>
+#include <array>
 #include <fstream>
 #include <cassert>
 #include <stdint.h>
