@@ -7,7 +7,7 @@
 
 class ExampleLayer : public NFrame::Layer {
 public:
-    ExampleLayer() : Layer("Example"), m_Camera(-1.6f, 1.6f, -0.9f, 0.9f), m_CameraPosition(0.0f) {
+    ExampleLayer() : Layer("Example"), m_CameraController(1280.0f/720.0f, true){
         
         m_VertexArray.reset(NFrame::VertexArray::Create());
 
@@ -125,32 +125,11 @@ public:
 
     void OnUpdate(NFrame::Timestep ts) override {
 
-        if(NFrame::Input::IsKeyPressed(NF_KEY_LEFT)){
-            m_CameraPosition.x -= m_CameraMoveSpeed * ts;
-        } 
-        else if(NFrame::Input::IsKeyPressed(NF_KEY_RIGHT)){
-            m_CameraPosition.x += m_CameraMoveSpeed * ts;
-        } 
-        if(NFrame::Input::IsKeyPressed(NF_KEY_UP)){
-            m_CameraPosition.y += m_CameraMoveSpeed * ts;
-        } 
-        else  if(NFrame::Input::IsKeyPressed(NF_KEY_DOWN)){
-            m_CameraPosition.y -= m_CameraMoveSpeed * ts;
-        }
-
-        if(NFrame::Input::IsKeyPressed(NF_KEY_A)){
-            m_CameraRotation += m_CameraRotationSpeed * ts;
-        }
-        else if(NFrame::Input::IsKeyPressed(NF_KEY_D)){
-            m_CameraRotation -= m_CameraRotationSpeed * ts;
-        }
-
+        m_CameraController.OnUpdate(ts);
         NFrame::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1.0f});
         NFrame::RenderCommand::Clear();
 
-        m_Camera.SetPosition(m_CameraPosition);
-        m_Camera.SetRotation(m_CameraRotation);
-        NFrame::Renderer::BeginScene(m_Camera);
+        NFrame::Renderer::BeginScene(m_CameraController.GetCamera());
 
 
         glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
@@ -183,6 +162,7 @@ public:
     }
 
     void OnEvent(NFrame::Event& event) override {
+        m_CameraController.OnEvent(event);
     } 
 
 
@@ -190,8 +170,6 @@ public:
     void OnImGuiRender() override {
         ImGui::Begin("Settings");
         ImGui::ColorEdit3("Square Color", glm::value_ptr(m_SquareColor));
-        ImGui::SliderFloat("Camera Move Speed", &m_CameraMoveSpeed, 0.1f, 20.0f);
-        ImGui::SliderFloat("Camera Rotation Speed", &m_CameraRotationSpeed, 10.0f, 500.0f);
         ImGui::End();
     }
 private:
@@ -202,11 +180,7 @@ private:
     NFrame::Ref<NFrame::Texture2D> m_Texture , m_LogoTexture;
     NFrame::Ref<NFrame::Shader> m_BlueShader;
     NFrame::Ref<NFrame::VertexArray> m_squareVA;
-    NFrame::OrthographicCamera m_Camera;
-    glm::vec3 m_CameraPosition;
-    float m_CameraMoveSpeed = 5.00f;
-    float m_CameraRotation = 0.0f;
-    float m_CameraRotationSpeed = 100.0f;
+    NFrame::OrthographicCameraController m_CameraController;
 
     glm::vec3 m_SquareColor = {0.2f, 0.3f, 0.8f};
 };
