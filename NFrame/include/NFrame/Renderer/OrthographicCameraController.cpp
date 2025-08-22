@@ -1,6 +1,6 @@
 #include "NFrame/nfpch.h"
 #include "NFrame/Renderer/OrthographicCamera.h"
-#include "NFrame/Core/OrthographicCameraController.h"
+#include "NFrame/Renderer/OrthographicCameraController.h"
 #include "NFrame/Core/Input.h"
 #include "NFrame/Core/KeyCodes.h"
 
@@ -15,16 +15,16 @@ namespace NFrame {
     void OrthographicCameraController::OnUpdate(Timestep ts)
     {
         if(Input::IsKeyPressed(NF_KEY_A)){
-            m_CameraPosition.x -= m_CameraTranslationSpped * ts;
+            m_CameraPosition.x -= m_CameraTranslationSpeed * ts;
         } 
         else if(Input::IsKeyPressed(NF_KEY_D)){
-            m_CameraPosition.x += m_CameraTranslationSpped * ts;
+            m_CameraPosition.x += m_CameraTranslationSpeed * ts;
         } 
         if(Input::IsKeyPressed(NF_KEY_W)){
-            m_CameraPosition.y += m_CameraTranslationSpped * ts;
+            m_CameraPosition.y += m_CameraTranslationSpeed * ts;
         } 
         else if(Input::IsKeyPressed(NF_KEY_S)){
-            m_CameraPosition.y -= m_CameraTranslationSpped * ts;
+            m_CameraPosition.y -= m_CameraTranslationSpeed * ts;
         }
         if(m_Rotation){
             if(Input::IsKeyPressed(NF_KEY_Q)){
@@ -36,7 +36,7 @@ namespace NFrame {
             m_Camera.SetRotation(m_CameraRotation);
         }
         m_Camera.SetPosition(m_CameraPosition);
-        m_CameraTranslationSpped = m_ZoomLevel;
+        m_CameraTranslationSpeed = m_ZoomLevel;
         m_CameraRotationSpeed = m_ZoomLevel ;
     }
 

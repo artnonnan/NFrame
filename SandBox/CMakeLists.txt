@@ -1,13 +1,7 @@
 project(SandBox)
 
-add_executable(SandBoxApp
-    src/SandBoxMain.cpp
-)
+file(GLOB SANDBOX_SRC CONFIGURE_DEPENDS "src/*.cpp")
 
-# Link กับ NFrame
+add_executable(SandBoxApp ${SANDBOX_SRC})
+
 target_link_libraries(SandBoxApp PRIVATE NFrame)
-
-# รวม include path จาก NFrame
-#target_include_directories(SandBoxApp PRIVATE
-#    ${CMAKE_SOURCE_DIR}/include
-#)

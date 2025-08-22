@@ -1,15 +1,17 @@
 #include "NFrame.h"
 #include "NFrame/Platform/OpenGL/OpenGLShader.h"
 #include "NFrame/Core/EntryPoint.h"
+
 #include "imgui.h"
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include "SandBox2D.h"
 
 class ExampleLayer : public NFrame::Layer {
 public:
     ExampleLayer() : Layer("Example"), m_CameraController(1280.0f/720.0f, true){
         
-        m_VertexArray.reset(NFrame::VertexArray::Create());
+        m_VertexArray = NFrame::VertexArray::Create();
 
         float vertices[3 * 7] = {
             -0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f,
@@ -30,7 +32,7 @@ public:
         indexBuffer.reset(NFrame::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
         m_VertexArray->SetIndexBuffer(indexBuffer);
 
-        m_squareVA.reset(NFrame::VertexArray::Create());
+        m_squareVA = NFrame::VertexArray::Create();
         float squareVertices[5 * 4] = {
             -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
              0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
@@ -193,7 +195,8 @@ private:
 class SandBoxApplication : public NFrame::Application {
 public:
     SandBoxApplication() {
-        PushLayer(new ExampleLayer());
+        //PushLayer(new ExampleLayer());
+        PushLayer(new SandBox2D());
         CLIENT_INFO("SandBoxApplication created");
     }
     virtual ~SandBoxApplication() {

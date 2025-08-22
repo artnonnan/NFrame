@@ -25,7 +25,7 @@ namespace NFrame {
             bool m_Rotation;
             glm::vec3 m_CameraPosition = {0.0f, 0.0f, 0.0f};
             float m_CameraRotation = 0.0f;
-            float m_CameraTranslationSpped = 100.0f;
+            float m_CameraTranslationSpeed = 100.0f;
             float m_CameraRotationSpeed = 100.0f;
     };
 }
