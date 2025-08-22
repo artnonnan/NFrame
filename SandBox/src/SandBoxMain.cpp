@@ -163,6 +163,11 @@ public:
 
     void OnEvent(NFrame::Event& event) override {
         m_CameraController.OnEvent(event);
+        // if(event.GetEventType() == NFrame::EventType::WindowResize) {
+        //     auto& e = static_cast<NFrame::WindowResizeEvent&>(event);
+        //     float zoom = (float)e.GetWidth() / 1280.0f;
+        //     m_CameraController.SetZoomLevel(zoom)
+        // }
     } 
 
 
