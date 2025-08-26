@@ -1,6 +1,7 @@
 #include "NFrame/nfpch.h"
 #include "Renderer.h"  
 #include "NFrame/Platform/OpenGL/OpenGLShader.h"
+#include "NFrame/Renderer/Renderer2D.h"
 
 namespace NFrame {
 
@@ -8,6 +9,7 @@ namespace NFrame {
 
     void Renderer::Init() {
         RenderCommand::Init();
+        Renderer2D::Init();
     }
 
     void Renderer::OnWindowResize(uint32_t width, uint32_t height) {

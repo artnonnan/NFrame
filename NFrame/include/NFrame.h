@@ -13,6 +13,7 @@
 #include "NFrame/ImGui/ImGuiLayer.h"
 
 #include "NFrame/Renderer/Renderer.h"
+#include "NFrame/Renderer/Renderer2D.h"
 #include "NFrame/Renderer/RenderCommand.h"
 
 #include "NFrame/Renderer/Buffer.h"
